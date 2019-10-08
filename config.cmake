@@ -9,4 +9,3 @@ set(
     USER_SRC_PATH 
     /home/bog/emu/usr/settingsmanager
     )
-
