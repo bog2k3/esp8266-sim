@@ -95,6 +95,8 @@ protected:
 
     std::shared_ptr<std::ifstream> inStream_;
     std::shared_ptr<std::ofstream> outStream_;
+
+    uint64_t inFileSize_ = 0;
 };
 
 class Dir {

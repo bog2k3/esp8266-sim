@@ -1,0 +1,1 @@
+{"testInLoadingJson":"the NewString","Level1":{"Level2Key":99,"Level2Test":false,"Level3":99.99,"*Level2Test":true},"*RootKey":"the NewString in root","**RootKey":22,"*Level1":{"*Level2Key":100,"*Level3":100.101}}

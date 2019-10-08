@@ -29,7 +29,7 @@ size_t HardwareSerial::readBytes(char* buffer, size_t size) {
 }
 
 void HardwareSerial::flush(void) {
-    throw "not implemented";
+    fflush(nullptr);
 }
 
 void HardwareSerial::setDebugOutput(bool) {

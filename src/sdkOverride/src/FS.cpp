@@ -1,19 +1,25 @@
 #include "FS.h"
 #include <fstream>
+#include <string>
 
 #if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_SPIFFS)
 fs::FS SPIFFS;
 #endif
+
+static const std::string rootFsPath = ".";///rootfs/";
 
 namespace fs {
 
 File::File(const char* path, const char* mode) {
     if (mode[0] == 'r') {
         auto sMode = std::ios_base::in | ( mode[1] == 'b' ? std::ios_base::binary : (std::ios_base::openmode)0);
-        inStream_ = std::make_shared<std::ifstream>(path, sMode);
+        inStream_ = std::make_shared<std::ifstream>(rootFsPath + path, sMode | std::ios_base::ate);
+        inFileSize_ = (inStream_ && inStream_->is_open()) ? (uint64_t)inStream_->tellg() : 0;
+        if (inStream_ && inStream_->is_open())
+            inStream_->seekg(0);
     } else if (mode[0] == 'w') {
         auto sMode = std::ios_base::out | ( mode[1] == 'b' ? std::ios_base::binary : (std::ios_base::openmode)0);
-        outStream_ = std::make_shared<std::ofstream>(path, sMode);
+        outStream_ = std::make_shared<std::ofstream>(rootFsPath + path, sMode);
     } else {
         throw "Invalid file open mode";
     }
@@ -24,31 +30,39 @@ File::operator bool() const {
 }
 
 int File::available() {
-    throw "not implemented";
-    return 0;
+    if (!inStream_ || !inStream_->is_open())
+        return 0;
+    return inFileSize_ - inStream_->tellg();
 }
 
 int File::read() {
-    throw "not implemented";
-    return 0;
+    if (!inStream_ || !inStream_->is_open())
+        throw "file is not opened for read!";
+    return inStream_->get();
 }
 
 int File::peek() {
-    throw "not implemented";
-    return 0;
+    if (!inStream_ || !inStream_->is_open())
+        throw "file is not opened for read!";
+    return inStream_->peek();
 }
 
-size_t File::write(uint8_t) {
-    throw "not implemented";
-    return 0;
+size_t File::write(uint8_t c) {
+    if (!outStream_ || !outStream_->is_open())
+        throw "file is not opened for write!";
+    outStream_->put(c);
+    return 1;
 }
 
 size_t File::write(const uint8_t *buf, size_t size) {
-    throw "not implemented";
-    return 0;
+    if (!outStream_ || !outStream_->is_open())
+        throw "file is not opened for write!";
+    outStream_->write((const char*)buf, size);
+    return size;
 }
 
 void File::flush()  {
+    fflush(nullptr);
 }
 
 size_t File::read(uint8_t* buf, size_t size) {

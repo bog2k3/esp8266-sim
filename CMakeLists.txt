@@ -52,6 +52,8 @@ target_compile_options(espSimulator PUBLIC
     -Wno-parentheses        # don't report unnecessary parantheses warning
     -std=c++11              # use C++11 standard
     -DDEBUG                 # define the DEBUG macro for all sources/headers
+    -DDEBUGGER              # enable DBG logging
+    -DARDUINO_ARCH_ESP8266  # needed for debug logging
     -march=i686             # compile as i686 32bit architecture
     -pthread                # enable pthread support
     -g                      # generate debug symbols
