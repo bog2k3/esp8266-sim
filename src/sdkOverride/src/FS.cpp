@@ -23,6 +23,33 @@ File::operator bool() const {
     return inStream_->is_open() || outStream_->is_open();
 }
 
+int File::available() {
+    throw "not implemented";
+    return 0;
+}
+
+int File::read() {
+    throw "not implemented";
+    return 0;
+}
+
+int File::peek() {
+    throw "not implemented";
+    return 0;
+}
+
+size_t File::write(uint8_t) {
+    throw "not implemented";
+    return 0;
+}
+
+size_t File::write(const uint8_t *buf, size_t size) {
+    throw "not implemented";
+    return 0;
+}
+
+// --------------------- FS ------------------------------
+
 File FS::open(const char* path, const char* mode) {
     return File(path, mode);
 }
@@ -37,6 +64,10 @@ File FS::open(const String& path, const char* mode) {
 }
 
 void FS::end() {
+}
+
+bool FS::begin() {
+    return true;
 }
 
 } // namespace fs

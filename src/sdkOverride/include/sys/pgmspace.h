@@ -1,5 +1,7 @@
 /* PGMSPACE.H - Accessor utilities/types for accessing PROGMEM data */
 
+#if (0)
+
 #ifndef _PGMSPACE_H_
 #define _PGMSPACE_H_
 
@@ -112,3 +114,7 @@ typedef uint32_t prog_uint32_t;
 #endif
 
 #endif
+
+#endif // if 0
+
+using PGM_P = const char*;
