@@ -47,10 +47,14 @@ add_executable(espSimulator ${SOURCES})
 
 set_property(TARGET espSimulator PROPERTY CXX_STANDARD 11)
 target_compile_options(espSimulator PUBLIC 
-    -Wall 
-    -Werror=return-type 
-    -Wno-parentheses
-    -std=c++11 -DDEBUG
-    -march=i686
-    -pthread)
-set(CMAKE_CXX_FLAGS "-m32")
+    -Wall                   # report all warnings
+    -Werror=return-type     # treat no return in function warning as error
+    -Wno-parentheses        # don't report unnecessary parantheses warning
+    -std=c++11              # use C++11 standard
+    -DDEBUG                 # define the DEBUG macro for all sources/headers
+    -march=i686             # compile as i686 32bit architecture
+    -pthread                # enable pthread support
+    -g                      # generate debug symbols
+    -O0                     # disable all optimisations
+)
+set(CMAKE_CXX_FLAGS "-m32") # tell C++ compiler to generate 32bit code

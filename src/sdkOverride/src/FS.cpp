@@ -20,7 +20,7 @@ File::File(const char* path, const char* mode) {
 }
 
 File::operator bool() const {
-    return inStream_->is_open() || outStream_->is_open();
+    return (inStream_ && inStream_->is_open()) || (outStream_ && outStream_->is_open());
 }
 
 int File::available() {
@@ -48,15 +48,75 @@ size_t File::write(const uint8_t *buf, size_t size) {
     return 0;
 }
 
-// --------------------- FS ------------------------------
+void File::flush()  {
+}
 
-File FS::open(const char* path, const char* mode) {
-    return File(path, mode);
+size_t File::read(uint8_t* buf, size_t size) {
+    throw "not implemented";
+    return 0;
+}
+
+bool File::seek(uint32_t pos, SeekMode mode) {
+    throw "not implemented";
+    return 0;
+}
+
+size_t File::position() const {
+    throw "not implemented";
+    return 0;
+}
+
+size_t File::size() const {
+    throw "not implemented";
+    return 0;
+}
+
+const char* File::name() const {
+    throw "not implemented";
+    return 0;
+}
+
+const char* File::fullName() const {
+    throw "not implemented";
+    return 0;
+}
+
+bool File::truncate(uint32_t size) {
+    throw "not implemented";
+    return false;
+}
+
+bool File::isFile() const {
+    return true;
+}
+
+bool File::isDirectory() const {
+    return false;
 }
 
 void File::close() {
     inStream_.reset();
     outStream_.reset();
+}
+
+void File::rewindDirectory() {
+    throw "not implemented";
+}
+
+File File::openNextFile() {
+    throw "not implemented";
+    return File("invalid", "invalid");
+}
+
+String File::readString() {
+    throw "not implemented";
+    return "";
+}
+
+// --------------------- FS ------------------------------
+
+File FS::open(const char* path, const char* mode) {
+    return File(path, mode);
 }
 
 File FS::open(const String& path, const char* mode) {

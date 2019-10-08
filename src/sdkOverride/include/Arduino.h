@@ -20,6 +20,8 @@
 #ifndef Arduino_h
 #define Arduino_h
 
+#define F_CPU 160000000 // 160 MHz
+
 #ifdef __cplusplus
 extern "C" {
 #endif
