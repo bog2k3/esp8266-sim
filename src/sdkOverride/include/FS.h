@@ -27,8 +27,7 @@ class File : public Stream
 {
 public:
     virtual ~File() {}
-    
-    //File(nullptr_t impl = nullptr, FS *baseFS = nullptr) : _fakeDir(nullptr), _baseFS(baseFS) { }
+
     File(const char* path, const char* mode);
 
     // Print methods:
@@ -101,7 +100,7 @@ protected:
 
 class Dir {
 public:
-    Dir(nullptr_t impl = nullptr, FS *baseFS = nullptr): _baseFS(baseFS) { }
+    Dir(): _baseFS(nullptr) { }
 
     File openFile(const char* mode);
 
@@ -157,7 +156,7 @@ public:
 class FS
 {
 public:
-    FS(nullptr_t impl = nullptr) {}
+    FS() {}
 
     bool setConfig(const FSConfig &cfg);
 
