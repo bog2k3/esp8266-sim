@@ -16,12 +16,6 @@ else()
 	include_directories(/usr/include/)
 endif()
 include_directories(${PLATFORMIO_PATH}/packages/framework-arduinoespressif8266/tools/sdk/include)
-#include_directories(${PLATFORMIO_PATH}/packages/toolchain-xtensa/xtensa-lx106-elf/include)
-#include_directories(${PLATFORMIO_PATH}/packages/toolchain-xtensa/xtensa-lx106-elf/include/c++/4.8.2)
-#include_directories(${PLATFORMIO_PATH}/packages/toolchain-xtensa/xtensa-lx106-elf/include/c++/4.8.2/xtensa-lx106-elf)
-#include_directories(${PLATFORMIO_PATH}/packages/framework-arduinoespressif8266/variants/nodemcu)
-
-#link_directories(${PLATFORMIO_PATH}/packages/toolchain-xtensa/xtensa-lx106-elf/lib)
 
 MACRO(HEADER_DIRECTORIES return_list)
     FILE(GLOB_RECURSE new_list ${USER_SRC_PATH}/.pio/libdeps/nodemcuv/*.h)
