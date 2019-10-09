@@ -3,17 +3,17 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "Build simulator and user code",
-            "type": "shell",
-            "command": "cmake .. && make",
-            "options": {
-                "cwd": "${workspaceFolder}/build"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
-    ]
+		{
+			"label": "Build simulator and user code",
+			"type": "shell",
+			"command": "cmake .. -G \"Unix Makefiles\" && make",
+			"options": {
+				"cwd": "${workspaceFolder}/build"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
 }

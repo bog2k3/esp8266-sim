@@ -7,9 +7,14 @@ set(CMAKE_BINARY_DIR build)
 include(config.cmake)
 
 include_directories(${CMAKE_SOURCE_DIR}/src/sdkOverride/include)
-include_directories(/usr/include/c++/8)
-include_directories(/usr/include/)
 include_directories(${PLATFORMIO_PATH}/packages/framework-arduinoespressif8266/cores/esp8266)
+if (WIN32)
+	include_directories("${MINGW_PATH}/lib/gcc/**/include/c++")
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__WIN32__  -mthreads")
+else()
+	include_directories(/usr/include/c++/8)
+	include_directories(/usr/include/)
+endif()
 include_directories(${PLATFORMIO_PATH}/packages/framework-arduinoespressif8266/tools/sdk/include)
 #include_directories(${PLATFORMIO_PATH}/packages/toolchain-xtensa/xtensa-lx106-elf/include)
 #include_directories(${PLATFORMIO_PATH}/packages/toolchain-xtensa/xtensa-lx106-elf/include/c++/4.8.2)
@@ -46,7 +51,7 @@ list(APPEND SOURCES ${sdkOverrideSources})
 add_executable(espSimulator ${SOURCES})
 
 set_property(TARGET espSimulator PROPERTY CXX_STANDARD 11)
-target_compile_options(espSimulator PUBLIC 
+target_compile_options(espSimulator PUBLIC
     -Wall                   # report all warnings
     -Werror=return-type     # treat no return in function warning as error
     -Wno-parentheses        # don't report unnecessary parantheses warning
